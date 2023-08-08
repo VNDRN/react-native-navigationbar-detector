@@ -1,26 +1,26 @@
-import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+import { Platform } from "react-native";
+import ReactNativeNavigationbarDetectorModule from "./ReactNativeNavigationbarDetectorModule";
+import { NavigationBarType } from "./ReactNativeNavigationbarDetector.types";
+export * from "./ReactNativeNavigationbarDetector.types";
 
-// Import the native module. On web, it will be resolved to ReactNativeNavigationbarDetector.web.ts
-// and on native platforms to ReactNativeNavigationbarDetector.ts
-import ReactNativeNavigationbarDetectorModule from './ReactNativeNavigationbarDetectorModule';
-import ReactNativeNavigationbarDetectorView from './ReactNativeNavigationbarDetectorView';
-import { ChangeEventPayload, ReactNativeNavigationbarDetectorViewProps } from './ReactNativeNavigationbarDetector.types';
+const getAndroidNavigationBarTypeForInteger = (integer: number): NavigationBarType => {
+  switch (integer) {
+    case 0:
+      return "threeButton";
+    case 1:
+      return "twoButton";
+    case 2:
+      return "gesture";
+    default:
+      return "threeButton";
+  }
+};
 
-// Get the native constant value.
-export const PI = ReactNativeNavigationbarDetectorModule.PI;
-
-export function hello(): string {
-  return ReactNativeNavigationbarDetectorModule.hello();
+export function getNavigationBarType() {
+  if (Platform.OS === "android") {
+    const integer = ReactNativeNavigationbarDetectorModule.getNavigationBarTypeInteger();
+    return getAndroidNavigationBarTypeForInteger(integer);
+  }
+  //TODO: add support for iOS
+  return "ios not yet supported";
 }
-
-export async function setValueAsync(value: string) {
-  return await ReactNativeNavigationbarDetectorModule.setValueAsync(value);
-}
-
-const emitter = new EventEmitter(ReactNativeNavigationbarDetectorModule ?? NativeModulesProxy.ReactNativeNavigationbarDetector);
-
-export function addChangeListener(listener: (event: ChangeEventPayload) => void): Subscription {
-  return emitter.addListener<ChangeEventPayload>('onChange', listener);
-}
-
-export { ReactNativeNavigationbarDetectorView, ReactNativeNavigationbarDetectorViewProps, ChangeEventPayload };
