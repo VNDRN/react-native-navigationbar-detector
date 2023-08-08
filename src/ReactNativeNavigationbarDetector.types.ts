@@ -1,7 +1,3 @@
-export type ChangeEventPayload = {
-  value: string;
-};
+export type AndroidNavigationBarType = "gesture" | "twoButton" | "threeButton";
 
-export type ReactNativeNavigationbarDetectorViewProps = {
-  name: string;
-};
+export type NavigationBarType = AndroidNavigationBarType;
