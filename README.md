@@ -1,23 +1,15 @@
 # react-native-navigationbar-detector
 
-My new module
+A React Native module that detects which navigationbar is used on android.
+This way, it is possible to detect if gestures, two buttons or three buttons are used.
 
-# API documentation
+> At the moment, this module only works on Android. If you want to use this module on iOS (for example to check whether a button or a gesture bar is used), please create an issue.
 
-- [Documentation for the main branch](https://github.com/expo/expo/blob/main/docs/pages/versions/unversioned/sdk/react-native-navigationbar-detector.md)
-- [Documentation for the latest stable release](https://docs.expo.dev/versions/latest/sdk/react-native-navigationbar-detector/)
-
-# Installation in managed Expo projects
-
-For [managed](https://docs.expo.dev/archive/managed-vs-bare/) Expo projects, please follow the installation instructions in the [API documentation for the latest stable release](#api-documentation). If you follow the link and there is no documentation available then this library is not yet usable within managed projects &mdash; it is likely to be included in an upcoming Expo SDK release.
-
-# Installation in bare React Native projects
-
-For bare React Native projects, you must ensure that you have [installed and configured the `expo` package](https://docs.expo.dev/bare/installing-expo-modules/) before continuing.
+## Installation
 
 ### Add the package to your npm dependencies
 
-```
+```bash
 npm install react-native-navigationbar-detector
 ```
 
@@ -25,11 +17,40 @@ npm install react-native-navigationbar-detector
 
 Run `npx pod-install` after installing the npm package.
 
-
 ### Configure for Android
 
+No additional steps needed
 
+## API documentation
 
-# Contributing
+The API is very simple to use, as there is only one method to call.
 
-Contributions are very welcome! Please refer to guidelines described in the [contributing guide]( https://github.com/expo/expo#contributing).
+### getNavigationBarType()
+
+This is a function to get the type of navigation bar being used. It's currently only compatible with Android devices. iOS compatibility is planned in the near future.
+
+#### Import
+
+```ts
+import { getNavigationBarType } from "path/to/ReactNativeNavigationbarDetectorModule"
+```
+
+#### Usage
+
+```ts
+const navBarType = getNavigationBarType();
+```
+
+#### Return Value
+
+__Type:__ NavigationBarType
+This function will return one of four potential strings:
+
+- _"threeButton"_: Indicates the navigation bar with three buttons.
+- _"twoButton"_: Indicates the navigation bar with two buttons.
+- _"gesture"_: Indicates that gesture navigation is being used.
+- _"ios not yet supported"_: If the device is not an Android, the function will return .
+
+## Contributing
+
+Contributions are very welcome! Please do so by opening an issue or creating a Pull Request.
