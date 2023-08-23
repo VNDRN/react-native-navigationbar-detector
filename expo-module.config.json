@@ -1,8 +1,5 @@
 {
-  "platforms": ["ios", "android", "web"],
-  "ios": {
-    "modules": ["ReactNativeNavigationbarDetectorModule"]
-  },
+  "platforms": ["android"],
   "android": {
     "modules": ["expo.modules.navigationbardetector.ReactNativeNavigationbarDetectorModule"]
   }
